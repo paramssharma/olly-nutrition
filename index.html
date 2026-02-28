@@ -1,0 +1,1121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>olly — Pediatrician-Formulated Daily Nutrition</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Poppins:wght@500;600&family=Cormorant+Garamond:wght@300&display=swap" rel="stylesheet" />
+
+  <style>
+    /* =============================================
+       DESIGN TOKENS — extracted from Figma node 363:3014
+       File: Pats&Rubs / Pats-Rubs
+    ============================================= */
+    :root {
+      /* Core palette */
+      --navy:           #0e1e32;   /* announcement bar, nav text, hero headline */
+      --white:          #ffffff;
+      --off-white:      #f8f8f8;   /* page bg */
+      --nav-bg:         #f5f4f2;   /* sticky nav */
+      --blue-cta:       #9de3f3;   /* primary CTA button, table highlight col */
+      --yellow:         #fbd570;   /* hero image backdrop */
+      --orange-cta:     #ff4a29;   /* WorkshopShop pill */
+      --eggplant:       #200827;   /* hero tagline, quiz CTA text */
+      --green-dark:     #1c331f;   /* section subheadings */
+      --green-deep:     #051f1b;   /* section headlines */
+      --olive:          #c5c739;   /* headline gradient accent */
+      --dark-card:      #1c1f2b;   /* product card, shop btn bg */
+      --cream:          #f3e6d3;   /* text on dark card btn */
+      --body-gray:      #4d4d4d;   /* long-form body copy */
+      --price-muted:    #aa9b83;   /* strikethrough price */
+      --star-coral:     #ed7954;   /* star rating icons */
+      --table-blue:     #2376b4;   /* table text + check icon */
+      --row-alt:        #f7f2f1;   /* alternating table rows */
+      --warm-cream-txt: #fffbf5;   /* workshop pill text */
+
+      /* Typography */
+      --font-sans:     'Inter', sans-serif;
+      --font-display:  'Poppins', sans-serif;
+      --font-headline: 'Cormorant Garamond', Georgia, serif; /* Fictional Trial substitute */
+
+      /* Layout */
+      --max-w: 1200px;
+      --page-px: 16px;
+
+      /* Radius */
+      --r-sm:   16px;   /* quiz CTA */
+      --r-md:   21px;   /* table */
+      --r-lg:   33px;   /* product image */
+      --r-card: 17px;   /* photo cards */
+      --r-pill: 9999px; /* full pill buttons */
+    }
+
+    /* =============================================
+       RESET
+    ============================================= */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: var(--font-sans);
+      background: var(--off-white);
+      color: var(--navy);
+      line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+    button { cursor: pointer; border: none; background: none; font: inherit; }
+
+    /* =============================================
+       UTILITIES
+    ============================================= */
+    .container {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-inline: var(--page-px);
+    }
+
+    /* =============================================
+       HEADER (sticky)
+    ============================================= */
+    .site-header {
+      position: sticky;
+      top: 0;
+      z-index: 200;
+      width: 100%;
+    }
+
+    /* -- Announcement bar -- */
+    .announce-bar {
+      background: var(--navy);
+      color: var(--white);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 32px;
+      padding-inline: var(--page-px);
+      font-size: 16px;
+      font-weight: 400;
+      line-height: 1.5;
+      text-align: center;
+    }
+
+    /* -- Nav -- */
+    .nav-wrap {
+      background: var(--nav-bg);
+      padding-inline: 8px;
+    }
+    .nav-inner {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      gap: 0;
+    }
+    .nav-group {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+    }
+    .nav-group--left  { flex: 1; }
+    .nav-group--right { flex: 1; justify-content: flex-end; }
+
+    .nav-logo {
+      font-family: var(--font-sans);
+      font-size: 26px;
+      font-weight: 900;
+      color: var(--navy);
+      letter-spacing: -0.5px;
+      flex-shrink: 0;
+      padding-inline: 24px;
+    }
+    .nav-link {
+      font-size: 13px;
+      font-weight: 400;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--navy);
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+    .nav-link:hover { opacity: 0.6; }
+
+    .nav-icons { display: flex; gap: 4px; }
+    .icon-btn {
+      width: 44px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      color: var(--navy);
+      transition: background 0.2s;
+    }
+    .icon-btn:hover { background: rgba(0,0,0,0.06); }
+    .icon-btn svg { width: 22px; height: 22px; }
+
+    .hamburger { display: none; padding: 8px; margin-left: auto; color: var(--navy); }
+    .hamburger svg { display: block; }
+
+    /* Mobile nav drawer */
+    .mobile-nav {
+      display: none;
+      flex-direction: column;
+      background: var(--nav-bg);
+      padding: 16px;
+      gap: 16px;
+      border-top: 1px solid rgba(0,0,0,0.06);
+    }
+    .mobile-nav.open { display: flex; }
+    .mobile-nav .nav-link { font-size: 15px; }
+
+    /* =============================================
+       HERO
+    ============================================= */
+    .hero {
+      background: var(--white);
+      padding: 40px var(--page-px);
+    }
+    .hero-grid {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+      padding-block: 40px;
+    }
+    .hero-left { display: flex; flex-direction: column; gap: 52px; }
+
+    .hero-text { display: flex; flex-direction: column; gap: 16px; }
+
+    .hero-subhead {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--eggplant);
+      line-height: 1.5;
+    }
+    .hero-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(38px, 5.2vw, 73px);
+      font-weight: 300;
+      color: var(--navy);
+      text-transform: uppercase;
+      line-height: 1.05;
+      letter-spacing: 0.01em;
+    }
+    .hero-body {
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--navy);
+      line-height: 1.4;
+      max-width: 572px;
+    }
+
+    .hero-ctas {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex-wrap: wrap;
+    }
+    .btn-quiz {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 22px;
+      background: var(--blue-cta);
+      color: var(--eggplant);
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      border-radius: var(--r-sm);
+      transition: filter 0.2s;
+      white-space: nowrap;
+    }
+    .btn-quiz:hover { filter: brightness(0.92); }
+    .btn-quiz svg { flex-shrink: 0; }
+
+    .btn-text-link {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--eggplant);
+      border-bottom: 2px solid var(--eggplant);
+      padding-bottom: 2px;
+      transition: opacity 0.2s;
+      white-space: nowrap;
+    }
+    .btn-text-link:hover { opacity: 0.65; }
+
+    .btn-workshop {
+      display: inline-flex;
+      align-items: center;
+      padding: 13px 24px;
+      background: var(--orange-cta);
+      color: var(--warm-cream-txt);
+      font-size: 17px;
+      font-weight: 500;
+      border-radius: var(--r-pill);
+      align-self: flex-start;
+      transition: filter 0.2s;
+    }
+    .btn-workshop:hover { filter: brightness(0.9); }
+
+    /* Hero image */
+    .hero-image {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .hero-image-bg {
+      width: 100%;
+      max-width: 480px;
+      aspect-ratio: 527 / 589;
+      background: var(--yellow);
+      border-radius: 46px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .hero-image-inner {
+      width: 90%;
+      height: 90%;
+      border-radius: 40px;
+      background: linear-gradient(135deg, rgba(255,255,255,0.25) 0%, rgba(251,213,112,0.05) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 96px;
+    }
+    /* Placeholder shimmer ring */
+    .hero-image-bg::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.3), transparent 60%);
+      pointer-events: none;
+    }
+
+    /* =============================================
+       APPROACH SECTION
+    ============================================= */
+    .approach {
+      padding: 60px 0 84px;
+      overflow: hidden;
+    }
+    .approach-header {
+      padding-inline: var(--page-px);
+      max-width: var(--max-w);
+      margin-inline: auto;
+      margin-bottom: 48px;
+    }
+    .section-subhead {
+      font-family: var(--font-display);
+      font-size: 20px;
+      font-weight: 500;
+      color: var(--green-dark);
+      margin-bottom: 8px;
+    }
+    .section-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(32px, 4.2vw, 60px);
+      font-weight: 300;
+      text-transform: uppercase;
+      line-height: 1.1;
+      background: linear-gradient(100deg, var(--green-deep) 55%, var(--olive) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* Overflowing photo strip */
+    .photo-strip {
+      display: grid;
+      grid-template-columns: repeat(4, 364px);
+      gap: 9px;
+      padding-inline: var(--page-px);
+    }
+    .photo-card {
+      border-radius: var(--r-card);
+      overflow: hidden;
+      aspect-ratio: 1 / 1;
+      background: var(--row-alt);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 64px;
+    }
+    /* Each card a slightly different tint */
+    .photo-card:nth-child(1) { background: #eee8e6; }
+    .photo-card:nth-child(2) { background: #e6ece6; }
+    .photo-card:nth-child(3) { background: #e8eee8; }
+    .photo-card:nth-child(4) { background: #f0ece8; }
+
+    /* =============================================
+       TRANSPARENCY / COMPARISON
+    ============================================= */
+    .transparency {
+      background: var(--white);
+      padding: 40px var(--page-px);
+    }
+    .transparency-grid {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 48px;
+      align-items: start;
+      padding-block: 40px;
+    }
+    .transparency-left {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+    .transparency-heading {
+      font-family: var(--font-headline);
+      font-size: clamp(22px, 2.6vw, 37px);
+      font-weight: 300;
+      color: #2b251f;
+      line-height: 1.2;
+    }
+    .transparency-body {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--body-gray);
+      line-height: 1.6;
+    }
+
+    /* Comparison table */
+    .comparison-wrap {
+      border-radius: var(--r-md);
+      overflow: auto;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-family: var(--font-sans);
+      min-width: 420px;
+    }
+    .comparison-table th {
+      height: 53px;
+      padding: 0 8px;
+      font-size: 12px;
+      font-weight: 700;
+      text-align: center;
+      vertical-align: middle;
+      background: var(--white);
+    }
+    .comparison-table th:first-child {
+      text-align: left;
+      padding-left: 16px;
+      width: 42%;
+    }
+    .comparison-table th.hl {
+      background: var(--blue-cta);
+      font-size: 17px;
+      font-weight: 900;
+      color: var(--table-blue);
+      letter-spacing: -0.4px;
+      min-width: 72px;
+    }
+    .comparison-table td {
+      height: 81px;
+      padding: 0 8px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--table-blue);
+      text-align: center;
+      vertical-align: middle;
+    }
+    .comparison-table td:first-child {
+      text-align: left;
+      padding-left: 16px;
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--table-blue);
+    }
+    .comparison-table td.hl { background: var(--blue-cta); }
+
+    /* Alternating rows */
+    .comparison-table tbody tr:nth-child(odd) td   { background: var(--row-alt); }
+    .comparison-table tbody tr:nth-child(even) td  { background: var(--white); }
+    .comparison-table tbody tr td.hl               { background: var(--blue-cta) !important; }
+
+    /* Check / X icons */
+    .check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--table-blue);
+    }
+    .x-mark {
+      display: inline-flex;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: rgba(0,0,0,0.1);
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      color: rgba(0,0,0,0.4);
+    }
+    .val { font-size: 21px; font-weight: 700; color: var(--table-blue); }
+
+    /* =============================================
+       PRODUCTS
+    ============================================= */
+    .products {
+      padding: 60px 0 60px var(--page-px);
+    }
+    .products-header {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      margin-bottom: 40px;
+      padding-right: var(--page-px);
+    }
+    .products-headline {
+      font-family: var(--font-headline);
+      font-size: clamp(32px, 4.2vw, 60px);
+      font-weight: 300;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      line-height: 1.1;
+    }
+
+    /* Scroll-snap slider */
+    .products-slider {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      padding-right: var(--page-px);
+      padding-bottom: 16px;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      cursor: grab;
+    }
+    .products-slider::-webkit-scrollbar { display: none; }
+    .products-slider.grabbing { cursor: grabbing; }
+
+    .product-card {
+      flex: 0 0 309px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      scroll-snap-align: start;
+    }
+    .product-img {
+      width: 309px;
+      height: 309px;
+      border-radius: var(--r-lg);
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 80px;
+      flex-shrink: 0;
+    }
+    .product-img:nth-child(1) { background: #ede8e5; }
+
+    .product-name {
+      font-size: 24.6px;
+      font-weight: 500;
+      text-transform: lowercase;
+      color: var(--dark-card);
+      line-height: 1.2;
+    }
+    .product-stars {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .stars { display: flex; gap: 2px; color: var(--star-coral); font-size: 14px; }
+    .review-count { font-size: 10px; font-weight: 900; color: #212529; }
+
+    .product-price {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .price-now {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--dark-card);
+    }
+    .price-was {
+      font-size: 13px;
+      font-weight: 300;
+      color: var(--price-muted);
+      text-decoration: line-through;
+    }
+    .btn-shop {
+      width: 309px;
+      padding: 13px 24px;
+      background: var(--dark-card);
+      color: var(--cream);
+      font-family: var(--font-sans);
+      font-size: 17px;
+      font-weight: 300;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      text-align: center;
+      border-radius: var(--r-pill);
+      transition: filter 0.2s;
+    }
+    .btn-shop:hover { filter: brightness(1.2); }
+
+    /* =============================================
+       CTA BANNER (textured backdrop)
+    ============================================= */
+    .cta-banner {
+      min-height: 490px;
+      background:
+        radial-gradient(ellipse at 20% 60%, rgba(197,199,57,0.5) 0%, transparent 55%),
+        radial-gradient(ellipse at 80% 40%, rgba(220,221,136,0.6) 0%, transparent 55%),
+        linear-gradient(160deg, rgb(238,242,204) 0%, rgb(220,221,136) 60%, rgb(197,199,57) 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 60px var(--page-px);
+      position: relative;
+      overflow: hidden;
+    }
+    /* Decorative blobs */
+    .cta-banner::before,
+    .cta-banner::after {
+      content: '';
+      position: absolute;
+      border-radius: 50%;
+      opacity: 0.25;
+    }
+    .cta-banner::before {
+      width: 400px; height: 400px;
+      background: rgb(5,31,27);
+      top: -100px; left: -80px;
+    }
+    .cta-banner::after {
+      width: 300px; height: 300px;
+      background: rgb(5,31,27);
+      bottom: -80px; right: -60px;
+    }
+    .cta-banner-body {
+      position: relative;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 32px;
+    }
+    .cta-banner h2 {
+      font-family: var(--font-headline);
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 300;
+      text-transform: uppercase;
+      color: var(--green-deep);
+      line-height: 1.05;
+      max-width: 700px;
+    }
+
+    /* =============================================
+       FOOTER
+    ============================================= */
+    .footer {
+      background: var(--navy);
+      color: var(--white);
+      padding: 56px var(--page-px) 32px;
+    }
+    .footer-grid {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      display: grid;
+      grid-template-columns: 1.4fr 1fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 40px;
+    }
+    .footer-brand-logo {
+      font-family: var(--font-sans);
+      font-size: 22px;
+      font-weight: 900;
+      margin-bottom: 12px;
+    }
+    .footer-tagline {
+      font-size: 14px;
+      color: rgba(255,255,255,0.6);
+      line-height: 1.6;
+    }
+    .footer-col h4 {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: rgba(255,255,255,0.4);
+      margin-bottom: 16px;
+    }
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .footer-col ul a {
+      font-size: 14px;
+      color: rgba(255,255,255,0.75);
+      transition: color 0.2s;
+    }
+    .footer-col ul a:hover { color: var(--white); }
+    .footer-bottom {
+      max-width: var(--max-w);
+      margin-inline: auto;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.12);
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      font-size: 13px;
+      color: rgba(255,255,255,0.4);
+    }
+
+    /* =============================================
+       RESPONSIVE
+    ============================================= */
+    @media (max-width: 1024px) {
+      .photo-strip {
+        grid-template-columns: repeat(4, 1fr);
+      }
+      .photo-card { font-size: 48px; }
+    }
+
+    @media (max-width: 900px) {
+      .hero-grid,
+      .transparency-grid {
+        grid-template-columns: 1fr;
+        gap: 32px;
+      }
+      .hero-image { order: -1; }
+      .hero-image-bg { max-width: 400px; margin-inline: auto; }
+
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+
+      .photo-strip {
+        grid-template-columns: repeat(2, 1fr);
+        padding-right: var(--page-px);
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav-group--left,
+      .nav-group--right,
+      .nav-icons { display: none; }
+
+      .hamburger { display: flex; }
+      .nav-logo { padding-inline: 0; }
+      .nav-inner { justify-content: space-between; }
+
+      .hero-headline { font-size: 38px; }
+      .hero-body { font-size: 18px; }
+      .btn-quiz, .btn-text-link { font-size: 18px; }
+
+      .announce-bar { font-size: 14px; }
+
+      .comparison-table th:not(:first-child):not(.hl) { display: none; }
+      .comparison-table td:not(:first-child):not(.hl) { display: none; }
+    }
+
+    @media (max-width: 540px) {
+      .hero-ctas { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .photo-strip { grid-template-columns: repeat(2, 1fr); padding-right: var(--page-px); }
+    }
+  </style>
+</head>
+<body>
+
+<!-- =============================================
+     HEADER
+============================================= -->
+<header class="site-header">
+  <div class="announce-bar">
+    Unlock 25% savings on every order
+  </div>
+  <nav class="nav-wrap" aria-label="Main navigation">
+    <div class="nav-inner">
+      <!-- Left links -->
+      <div class="nav-group nav-group--left">
+        <a href="#products" class="nav-link">Our Products</a>
+        <a href="#approach" class="nav-link">Our Story</a>
+      </div>
+
+      <!-- Logo (centre) -->
+      <a href="#" class="nav-logo" aria-label="olly home">olly</a>
+
+      <!-- Right links -->
+      <div class="nav-group nav-group--right">
+        <a href="#" class="nav-link">Contact Us</a>
+        <a href="#" class="nav-link">Take the Quiz</a>
+        <div class="nav-icons">
+          <button class="icon-btn" aria-label="Account">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="8" r="4"/>
+              <path d="M4 20c0-4 3.6-7 8-7s8 3 8 7"/>
+            </svg>
+          </button>
+          <button class="icon-btn" aria-label="Cart">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6L18 2z"/>
+              <line x1="3" y1="6" x2="21" y2="6"/>
+              <path d="M16 10a4 4 0 01-8 0"/>
+            </svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Mobile hamburger -->
+      <button class="hamburger" aria-label="Open menu" aria-expanded="false">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
+          <line x1="3" y1="6"  x2="21" y2="6"/>
+          <line x1="3" y1="12" x2="21" y2="12"/>
+          <line x1="3" y1="18" x2="21" y2="18"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile drawer -->
+    <div class="mobile-nav" id="mobile-nav" role="menu">
+      <a href="#products" class="nav-link" role="menuitem">Our Products</a>
+      <a href="#approach" class="nav-link" role="menuitem">Our Story</a>
+      <a href="#"         class="nav-link" role="menuitem">Contact Us</a>
+      <a href="#"         class="nav-link" role="menuitem">Take the Quiz</a>
+    </div>
+  </nav>
+</header>
+
+<!-- =============================================
+     HERO
+============================================= -->
+<section class="hero" aria-label="Hero">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-text">
+        <p class="hero-subhead">Pediatrician-Formulated Daily Nutrition</p>
+        <h1 class="hero-headline">A&nbsp;Healthier Childhood Built Into Every&nbsp;Day</h1>
+        <p class="hero-body">Simple, science-backed supplements designed for growing kids. No added sugar. No hidden junk.</p>
+      </div>
+
+      <div class="hero-ctas">
+        <a href="#" class="btn-quiz">
+          Take the quiz
+          <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+            <path d="M1 6h12M7.5 1.5L13 6l-5.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#products" class="btn-text-link">View all products</a>
+      </div>
+
+      <a href="#" class="btn-workshop">Register for upcoming WorkerShop</a>
+    </div>
+
+    <div class="hero-image">
+      <div class="hero-image-bg">
+        <div class="hero-image-inner">🌿</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     APPROACH
+============================================= -->
+<section class="approach" id="approach" aria-label="Our approach">
+  <div class="approach-header">
+    <p class="section-subhead">Feeding well should feel simple.</p>
+    <h2 class="section-headline">Our Approach to Everyday Nutrition</h2>
+  </div>
+  <div class="photo-strip">
+    <div class="photo-card">🌾</div>
+    <div class="photo-card">🥦</div>
+    <div class="photo-card">🫐</div>
+    <div class="photo-card">🥕</div>
+  </div>
+</section>
+
+<!-- =============================================
+     TRANSPARENCY / COMPARISON
+============================================= -->
+<section class="transparency" aria-label="Why olly">
+  <div class="transparency-grid">
+    <!-- Left column -->
+    <div class="transparency-left">
+      <a href="#" class="btn-workshop" style="width:fit-content">Register for upcoming WorkerShop</a>
+
+      <h2 class="transparency-heading">
+        Your child's nutrition should be the most transparent thing in your kitchen
+      </h2>
+      <p class="transparency-body">
+        Unlike many vitamins that may sit on a store shelf for months, each month we send a pouch of fresh vitamins to pour into your refillable, child-resistant glass bottle designed for nutrient protection.
+      </p>
+      <p class="transparency-body">
+        Easy-to-start, easy-to-cancel — with free shipping and total flexibility — delivered monthly on a pediatrician-recommended 30-day schedule based on modern nutritional guidelines.
+      </p>
+    </div>
+
+    <!-- Right column: comparison table -->
+    <div class="comparison-wrap">
+      <table class="comparison-table" aria-label="Product comparison">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col" class="hl">olly</th>
+            <th scope="col">Brand B</th>
+            <th scope="col">Brand C</th>
+            <th scope="col">Brand D</th>
+            <th scope="col">Brand E</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Kids Only</td>
+            <td class="hl">
+              <span class="check">
+                <svg width="23" height="21" viewBox="0 0 23 21" fill="none">
+                  <path d="M2 11L9 18L21 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+          </tr>
+          <tr>
+            <td>Reusable Bottle</td>
+            <td class="hl">
+              <span class="check">
+                <svg width="23" height="21" viewBox="0 0 23 21" fill="none">
+                  <path d="M2 11L9 18L21 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+          </tr>
+          <tr>
+            <td>Sugar-Free Formula</td>
+            <td class="hl">
+              <span class="check">
+                <svg width="23" height="21" viewBox="0 0 23 21" fill="none">
+                  <path d="M2 11L9 18L21 2" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </span>
+            </td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+            <td><span class="x-mark">✕</span></td>
+          </tr>
+          <tr>
+            <td>Vitamins per Day</td>
+            <td class="hl"><span class="val">1</span></td>
+            <td><span class="val">4</span></td>
+            <td><span class="val">2</span></td>
+            <td><span class="val">2</span></td>
+            <td><span class="val">2</span></td>
+          </tr>
+          <tr>
+            <td>Grams of Sugar</td>
+            <td class="hl"><span class="val">0g</span></td>
+            <td><span class="val">5g</span></td>
+            <td><span class="val">3g</span></td>
+            <td><span class="val">2g</span></td>
+            <td><span class="val">2g</span></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     PRODUCTS
+============================================= -->
+<section class="products" id="products" aria-label="Our products">
+  <div class="products-header">
+    <p class="section-subhead">Feeding well should feel simple.</p>
+    <h2 class="products-headline">We Built the Daily Vitamin Indian Kids Need</h2>
+  </div>
+
+  <div class="products-slider" role="list" aria-label="Product cards">
+
+    <article class="product-card" role="listitem">
+      <div class="product-img" style="background:#ece5e0;">🫐</div>
+      <p class="product-name">Perfect Superfood</p>
+      <div class="product-stars">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <span class="review-count">(75 Reviews)</span>
+      </div>
+      <div class="product-price">
+        <span class="price-now">$97.49</span>
+        <span class="price-was">$136.83</span>
+      </div>
+      <button class="btn-shop">Shop Now</button>
+    </article>
+
+    <article class="product-card" role="listitem">
+      <div class="product-img" style="background:#e4ece4;">🥦</div>
+      <p class="product-name">Perfect Kibble</p>
+      <div class="product-stars">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <span class="review-count">(198 Reviews)</span>
+      </div>
+      <div class="product-price">
+        <span class="price-now">$54.74</span>
+        <span class="price-was">$76.83</span>
+      </div>
+      <button class="btn-shop">Shop Now</button>
+    </article>
+
+    <article class="product-card" role="listitem">
+      <div class="product-img" style="background:#e8ece2;">🌱</div>
+      <p class="product-name">Perfect Mix</p>
+      <div class="product-stars">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <span class="review-count">(79 Reviews)</span>
+      </div>
+      <div class="product-price">
+        <span class="price-now">$22.49</span>
+        <span class="price-was">$31.57</span>
+      </div>
+      <button class="btn-shop">Shop Now</button>
+    </article>
+
+    <article class="product-card" role="listitem">
+      <div class="product-img" style="background:#e6ebe8;">🌿</div>
+      <p class="product-name">Perfect Mix</p>
+      <div class="product-stars">
+        <div class="stars" aria-label="5 stars">★★★★★</div>
+        <span class="review-count">(79 Reviews)</span>
+      </div>
+      <div class="product-price">
+        <span class="price-now">$22.49</span>
+        <span class="price-was">$31.57</span>
+      </div>
+      <button class="btn-shop">Shop Now</button>
+    </article>
+
+  </div>
+</section>
+
+<!-- =============================================
+     CTA BANNER
+============================================= -->
+<section class="cta-banner" aria-label="Start your journey">
+  <div class="cta-banner-body">
+    <h2>Start Your Child's Health Journey Today</h2>
+    <a href="#" class="btn-quiz" style="font-size:18px;">
+      Take the quiz
+      <svg width="14" height="12" viewBox="0 0 14 12" fill="none">
+        <path d="M1 6h12M7.5 1.5L13 6l-5.5 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    </a>
+  </div>
+</section>
+
+<!-- =============================================
+     FOOTER
+============================================= -->
+<footer class="footer">
+  <div class="footer-grid">
+    <div>
+      <div class="footer-brand-logo">olly</div>
+      <p class="footer-tagline">Pediatrician-formulated daily nutrition for growing kids. No sugar. No junk. Just what they need.</p>
+    </div>
+    <div class="footer-col">
+      <h4>Products</h4>
+      <ul>
+        <li><a href="#">Perfect Superfood</a></li>
+        <li><a href="#">Perfect Kibble</a></li>
+        <li><a href="#">Perfect Mix</a></li>
+        <li><a href="#">View All</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Company</h4>
+      <ul>
+        <li><a href="#">Our Story</a></li>
+        <li><a href="#">Science</a></li>
+        <li><a href="#">Press</a></li>
+        <li><a href="#">Contact</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Support</h4>
+      <ul>
+        <li><a href="#">FAQ</a></li>
+        <li><a href="#">Shipping</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">Privacy Policy</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 olly. All rights reserved.</span>
+    <span>Made with care for growing kids.</span>
+  </div>
+</footer>
+
+<script>
+  /* -----------------------------------------------
+     Mobile nav toggle
+  ----------------------------------------------- */
+  const hamburger = document.querySelector('.hamburger');
+  const mobileNav = document.getElementById('mobile-nav');
+
+  hamburger?.addEventListener('click', () => {
+    const isOpen = mobileNav.classList.toggle('open');
+    hamburger.setAttribute('aria-expanded', isOpen);
+  });
+
+  // Close mobile nav when a link is clicked
+  mobileNav?.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      mobileNav.classList.remove('open');
+      hamburger.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  /* -----------------------------------------------
+     Product slider — drag to scroll
+  ----------------------------------------------- */
+  const slider = document.querySelector('.products-slider');
+  if (slider) {
+    let isDown = false, startX = 0, scrollLeft = 0;
+
+    slider.addEventListener('mousedown', e => {
+      isDown = true;
+      slider.classList.add('grabbing');
+      startX = e.pageX - slider.offsetLeft;
+      scrollLeft = slider.scrollLeft;
+    });
+    slider.addEventListener('mouseleave', () => { isDown = false; slider.classList.remove('grabbing'); });
+    slider.addEventListener('mouseup',    () => { isDown = false; slider.classList.remove('grabbing'); });
+    slider.addEventListener('mousemove',  e => {
+      if (!isDown) return;
+      e.preventDefault();
+      const x = e.pageX - slider.offsetLeft;
+      slider.scrollLeft = scrollLeft - (x - startX) * 1.4;
+    });
+  }
+</script>
+</body>
+</html>
