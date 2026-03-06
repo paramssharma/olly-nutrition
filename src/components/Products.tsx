@@ -2,16 +2,15 @@ export default function Products() {
   return (
     <section className="product-feature" aria-label="Kids Daily Multivitamin Gummy">
       <div className="product-feature-content">
-        <div className="hero-image-wrap">
-          <div className="hero-img-bg" />
-          <div className="hero-img-frame">
-            <img
-              src="http://localhost:3845/assets/79b4701e7aacd0a231c57953e59ad461565b6c2f.png"
-              alt="Kids Daily Multivitamin Gummy"
-            />
-          </div>
+        {/* Product image — desktop: left column; mobile: below text via order CSS */}
+        <div className="product-img-wrap">
+          <picture>
+            <source media="(max-width: 900px)" srcSet="/product-mobile-image.png" />
+            <img src="/product-image.png" alt="Kids Daily Multivitamin Gummy" className="product-img" />
+          </picture>
         </div>
 
+        {/* Text content */}
         <div className="product-right">
           <h2 className="product-title">
             Kids Daily<br />Multivitamin Gummy
@@ -25,7 +24,7 @@ export default function Products() {
               </p>
             </div>
             <div className="product-detail-block">
-              <p className="detail-heading">The clean label:</p>
+              <p className="detail-heading">The clean label</p>
               <p className="detail-body">
                 Pectin base · Zero added sugar · Fruit juice sweetened · Natural colors (beetroot, turmeric, spirulina) · No artificial flavors · Vegan
               </p>
@@ -33,16 +32,19 @@ export default function Products() {
           </div>
 
           <div className="product-ctas">
-            <a href="#" className="btn-primary">Subscribe — ₹799/mo →</a>
-            <span className="price-alt">One-Time — ₹899</span>
+            <a href="#" className="btn-primary">
+              Subscribe — ₹799/mo
+              <img src="/arrow-icon.svg" alt="" aria-hidden="true" className="btn-arrow" />
+            </a>
+            <a href="#" className="btn-outline product-btn-onetime">One-Time — ₹899</a>
           </div>
         </div>
 
-        <div className="product-badge">
-          <img
-            src="http://localhost:3845/assets/2c37a9358fd2c9be7e176058349a7da4ef87cc48.svg"
-            alt="Badge"
-          />
+        <div className="product-badge product-badge-desktop" aria-hidden="true">
+          <img src="/badge.svg" alt="" className="badge-img" />
+        </div>
+        <div className="product-badge product-badge-mobile" aria-hidden="true">
+          <img src="/badge-mobile.svg" alt="" className="badge-img" />
         </div>
       </div>
     </section>

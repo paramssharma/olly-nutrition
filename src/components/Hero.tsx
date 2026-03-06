@@ -2,32 +2,29 @@ export default function Hero() {
   return (
     <section className="hero" aria-label="Hero">
       <div className="hero-content">
-        <div className="hero-left">
+        <div className="hero-col-left">
           <div className="hero-text">
             <p className="hero-subhead">#1 Daily Nutrition</p>
-            <h1 className="hero-headline">ZERO SUGAR. ZERO INACTIVE INGREDIENTS. ZERO COMPROMISE.</h1>
+            <h1 className="hero-headline">Zero sugar. Zero inactive ingredients. Zero compromise.</h1>
             <p className="hero-body">
-              Finally, a daily nutrition brand that respects your intelligence. Every ingredient listed, every dose
-              justified, nothing hidden.
+              The only children's gummy in India with methylcobalamin, methylfolate, and K2<span className="hero-body-extra"> — the three nutrients every other brand gets wrong.</span>
             </p>
           </div>
 
           <div className="hero-ctas">
             <a href="#" className="btn-primary">
               Subscribe — ₹799/mo
-              <svg width="18" height="14" viewBox="0 0 18 14" fill="none" aria-hidden="true">
-                <path d="M1 7h16M10 1l7 6-7 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
+              <img src="/arrow-icon.svg" alt="" aria-hidden="true" className="btn-arrow" />
             </a>
             <a href="#products" className="btn-outline">See what's inside</a>
           </div>
         </div>
 
         <div className="hero-image-wrap">
-          <div className="hero-img-bg" />
-          <div className="hero-img-frame">
-            <img src="/hero-image.png" alt="Smiling girl holding Olly nutrition products" />
-          </div>
+          <picture className="hero-picture">
+            <source media="(max-width: 768px)" srcSet="/hero-mobile.png" />
+            <img src="/hero-desktop.png" alt="Smiling girl with Olly nutrition products" className="hero-img" />
+          </picture>
         </div>
       </div>
     </section>

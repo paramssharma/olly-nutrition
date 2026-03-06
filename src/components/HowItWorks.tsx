@@ -32,10 +32,18 @@ export default function HowItWorks() {
         <div className="hiw-cards">
           {cards.map((card) => (
             <div key={card.title} className="hiw-card">
-              <div className="hiw-icon" aria-hidden="true" />
+              <img src="/hiw-icon.svg" className="hiw-icon" alt="" aria-hidden="true" />
               <h3 className="hiw-card-title">{card.title}</h3>
               <p className="hiw-card-body">{card.body}</p>
-              <a href="#" className="hiw-card-link">Subscribe →</a>
+              <div className="hiw-card-link-wrap">
+                <div className="hiw-card-link-inner">
+                  <span className="hiw-card-link-text">Subscribe</span>
+                  <div className="hiw-link-line-container" aria-hidden="true">
+                    <img src="/hiw-link-line.svg" className="hiw-link-line" alt="" />
+                  </div>
+                </div>
+                <img src="/hiw-arrow-blue.svg" className="hiw-card-arrow" alt="" aria-hidden="true" />
+              </div>
             </div>
           ))}
         </div>

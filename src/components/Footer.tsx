@@ -1,62 +1,131 @@
-const InstagramIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
-    <circle cx="12" cy="12" r="4"/>
-    <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/>
-  </svg>
-)
+// ── Social icon SVG assets ──────────────────────────────────────────────────
+// Shared circle outline (Instagram + Facebook)
+const vCircle    = '/social-circle.svg'
+// Instagram paths
+const vInstaBox  = '/social-insta-box.svg'
+const vInstaDot  = '/social-insta-dot.svg'
+const vInstaView = '/social-insta-view.svg'
+// Facebook paths
+const vFbF       = '/social-fb-f.svg'
+const vFbBar     = '/social-fb-bar.svg'
+// YouTube paths
+const vYtCircle  = '/social-yt-circle.svg'
+const vYtPlay    = '/social-yt-play.svg'
+const vYtBar     = '/social-yt-bar.svg'
 
-const FacebookIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
-  </svg>
-)
+const imgLogo       = '/footer-logo.svg'
+const imgMobileLogo = '/footer-logo-mobile.svg'
 
-const YouTubeIcon = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round">
-    <path d="M22.54 6.42a2.78 2.78 0 0 0-1.95-1.97C18.88 4 12 4 12 4s-6.88 0-8.59.45A2.78 2.78 0 0 0 1.46 6.42 29 29 0 0 0 1 12a29 29 0 0 0 .46 5.58 2.78 2.78 0 0 0 1.95 1.97C5.12 20 12 20 12 20s6.88 0 8.59-.45a2.78 2.78 0 0 0 1.95-1.97A29 29 0 0 0 23 12a29 29 0 0 0-.46-5.58z"/>
-    <polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="currentColor" stroke="none"/>
-  </svg>
-)
+// Each icon: 40×40 clip container → 39.024×40 inner (0.488px h-padding) → absolute layers
+function InstagramIcon() {
+  return (
+    <div style={{ width: 40, height: 40, overflow: 'hidden', flexShrink: 0 }}>
+      <div style={{ position: 'relative', width: 39.024, height: 40, margin: '0 0.488px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: '0.53% 0 1.91% 0' }}>
+          <img src={vCircle} alt="" style={{ position: 'absolute', display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+        </div>
+        <div style={{ position: 'absolute', inset: '31.63% 30.63% 33.01% 33.12%' }}>
+          <div style={{ position: 'absolute', inset: '-5.17%' }}>
+            <img src={vInstaBox} alt="" style={{ display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+          </div>
+        </div>
+        <div style={{ position: 'absolute', inset: '41.38% 40.62% 42.76% 43.12%' }}>
+          <div style={{ position: 'absolute', inset: '-11.53% -11.54%' }}>
+            <img src={vInstaDot} alt="" style={{ display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+          </div>
+        </div>
+        <div style={{ position: 'absolute', inset: '37.12% 36.25% 59.23% 60%' }}>
+          <img src={vInstaView} alt="" style={{ position: 'absolute', display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function FacebookIcon() {
+  return (
+    <div style={{ width: 40, height: 40, overflow: 'hidden', flexShrink: 0 }}>
+      <div style={{ position: 'relative', width: 39.024, height: 40, margin: '0 0.488px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: '0.53% 0 1.91% 0' }}>
+          <img src={vCircle} alt="" style={{ position: 'absolute', display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+        </div>
+        <div style={{ position: 'absolute', inset: '29.19% 28.12% 30.57% 30.62%' }}>
+          <div style={{ position: 'absolute', inset: '-4.54% -4.55% -4.54% -4.54%' }}>
+            <img src={vFbF} alt="" style={{ display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+          </div>
+        </div>
+        <div style={{ position: 'absolute', inset: '39.71% 41.72% 31.48% 47.03%' }}>
+          <div style={{ position: 'absolute', inset: '-6.35% -16.67%' }}>
+            <img src={vFbBar} alt="" style={{ display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
+
+function YouTubeIcon() {
+  return (
+    <div style={{ width: 40, height: 40, overflow: 'hidden', flexShrink: 0 }}>
+      <div style={{ position: 'relative', width: 39.024, height: 40, margin: '0 0.488px', overflow: 'hidden' }}>
+        <div style={{ position: 'absolute', inset: '0.13% 0 2.31% 0' }}>
+          <img src={vYtCircle} alt="" style={{ position: 'absolute', display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+        </div>
+        <div style={{ position: 'absolute', inset: '33.48% 28.92% 29.04% 34.16%' }}>
+          <div style={{ position: 'absolute', inset: '-4.88% -5.08% -0.18% -5.08%' }}>
+            <img src={vYtPlay} alt="" style={{ display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+          </div>
+        </div>
+        <div style={{ position: 'absolute', inset: '42.65% 39.05% 39.06% 46.07%' }}>
+          <div style={{ position: 'absolute', inset: '-10% -12.6%' }}>
+            <img src={vYtBar} alt="" style={{ display: 'block', width: '100%', height: '100%', maxWidth: 'none' }} />
+          </div>
+        </div>
+      </div>
+    </div>
+  )
+}
 
 const navLinks = ['Adults', 'Kids', 'Our story', 'Blogs', 'Learn']
 
 export default function Footer() {
   return (
     <footer className="footer">
-      <div className="footer-main">
+
+      {/* Mobile-only top bar: logo + social icons */}
+      <div className="footer-mobile-topbar">
+        <img src={imgMobileLogo} alt="Olly" className="footer-mobile-logo" />
         <div className="footer-social">
-          <a href="#" className="footer-social-icon" aria-label="Instagram">
-            <InstagramIcon />
-          </a>
-          <a href="#" className="footer-social-icon" aria-label="Facebook">
-            <FacebookIcon />
-          </a>
-          <a href="#" className="footer-social-icon" aria-label="YouTube">
-            <YouTubeIcon />
-          </a>
-        </div>
-
-        <div className="footer-nav-col">
-          {navLinks.map((link) => (
-            <a key={link} href="#">{link}</a>
-          ))}
-        </div>
-
-        <div className="footer-nav-col">
-          {navLinks.map((link) => (
-            <a key={link} href="#">{link}</a>
-          ))}
+          <a href="#" className="footer-social-icon" aria-label="Instagram"><InstagramIcon /></a>
+          <a href="#" className="footer-social-icon" aria-label="Facebook"><FacebookIcon /></a>
+          <a href="#" className="footer-social-icon" aria-label="YouTube"><YouTubeIcon /></a>
         </div>
       </div>
 
+      {/* Desktop-only main section: wide social col + two nav cols */}
+      <div className="footer-main">
+        <div className="footer-social">
+          <a href="#" className="footer-social-icon" aria-label="Instagram"><InstagramIcon /></a>
+          <a href="#" className="footer-social-icon" aria-label="Facebook"><FacebookIcon /></a>
+          <a href="#" className="footer-social-icon" aria-label="YouTube"><YouTubeIcon /></a>
+        </div>
+        <div className="footer-nav-col">
+          {navLinks.map((link) => <a key={link} href="#">{link}</a>)}
+        </div>
+        <div className="footer-nav-col">
+          {navLinks.map((link) => <a key={link} href="#">{link}</a>)}
+        </div>
+      </div>
+
+      {/* Bottom bar */}
       <div className="footer-bottom">
         <div className="footer-logo-area">
-          <img src="/olly-logo.svg" alt="olly" />
+          <img src={imgLogo} alt="Olly" width="466" height="32" />
         </div>
         <p className="footer-address">Eden Au Lac Apartments, Indranagar, 560038</p>
         <a href="mailto:hello@ollyhealth.in" className="footer-email">hello@ollyhealth.in</a>
       </div>
+
     </footer>
   )
 }

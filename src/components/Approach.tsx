@@ -34,27 +34,30 @@ const cards: CardData[] = [
 
 const TOTAL_DOTS = 12
 
-const BOTANICAL_MASK = 'http://localhost:3845/assets/4534a2ea65f827a84b97ca4f44ae77687186dbff.svg'
-const BOTANICAL_IMG  = 'http://localhost:3845/assets/5ed51cc70e9637df65b9fed5b29384f5ce19c0ef.svg'
-
 export default function Approach() {
   return (
     <section className="problem">
-      {/* Botanical background overlay — matches Figma h=490px absolutely-positioned element */}
-      <div className="problem-botanical" aria-hidden="true">
-        <div
-          className="problem-botanical-inner"
-          style={{ maskImage: `url('${BOTANICAL_MASK}')`, WebkitMaskImage: `url('${BOTANICAL_MASK}')` }}
-        >
-          <img src={BOTANICAL_IMG} alt="" />
+      {/* Desktop botanical overlay */}
+      <div className="problem-botanical problem-botanical-desktop" aria-hidden="true">
+        <div className="problem-botanical-inner">
+          <img src="/botanical-img-desktop.svg" alt="" />
         </div>
       </div>
 
+      {/* Mobile botanical overlay — different SVG, different dimensions */}
+      <div className="problem-botanical problem-botanical-mobile" aria-hidden="true">
+        <div className="problem-botanical-inner-mobile">
+          <img src="/botanical-img-mobile.svg" alt="" />
+        </div>
+      </div>
+
+      {/* Header */}
       <div className="problem-header">
         <p className="problem-subhead">Feeding well should feel simple.</p>
         <h2 className="problem-headline">The Problem with Kids' Nutrition in India</h2>
       </div>
 
+      {/* Scrolling cards strip */}
       <div className="problem-cards-strip">
         {cards.map((card) => (
           <div key={card.label} className="problem-card">
@@ -77,10 +80,27 @@ export default function Approach() {
         ))}
       </div>
 
-      <div className="problem-separator">
+      {/* Comparison wrapper */}
+      <div className="problem-comparison-wrap">
         <p className="problem-separator-text">
           So you bought a children's supplement. That should solve it, right?
         </p>
+
+        <div className="problem-comparison-content">
+          <div className="comparison-left">
+            <h2>The ingredient report card no brand wants you to see.</h2>
+            <p>Every major kids' supplement in India uses forms of B12 and folate that up to 60% of Indian children can't properly absorb.</p>
+            <p>40–60% of Indians carry an MTHFR gene variant that makes converting these synthetic forms difficult or impossible. Your child's vitamin may contain the right nutrients — in forms their body can't use.</p>
+          </div>
+
+          <div className="problem-comparison-img-wrap">
+            <img
+              src="/comparison-table.png"
+              alt="Ingredient comparison table"
+              className="problem-comparison-img"
+            />
+          </div>
+        </div>
       </div>
     </section>
   )
