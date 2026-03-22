@@ -7,17 +7,18 @@ export default function Hero() {
             <p className="hero-subhead">#1 Daily Nutrition</p>
             <h1 className="hero-headline">Zero sugar. Zero inactive ingredients. Zero compromise.</h1>
             <p className="hero-body">
-              The only children's gummy in India with methylcobalamin, methylfolate, and K2<span className="hero-body-extra"> — the three nutrients every other brand gets wrong.</span>
+              A children's gummy made with active, bioavailable vitamin forms<span className="hero-body-extra"> — not the synthetic versions most brands sell.</span>
             </p>
           </div>
 
           <div className="hero-ctas">
-            <a href="#" className="btn-primary">
-              Subscribe — ₹799/mo
+            <a href="#subscribe" className="btn-primary">
+              Subscribe — <span className="price-anchor">&#8377;1,199</span> &#8377;799/mo
               <img src="/arrow-icon.svg" alt="" aria-hidden="true" className="btn-arrow" />
             </a>
             <a href="#products" className="btn-outline">See what's inside</a>
           </div>
+          <p className="hero-trust">FSSAI Licensed · GMP Certified · Third-Party Lab Tested</p>
         </div>
 
         <div className="hero-image-wrap">

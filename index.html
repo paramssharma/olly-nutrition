@@ -3,13 +3,61 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="India's first zero-sugar kids' gummy with methylcobalamin B12, 5-MTHF folate, and D3+K2. Pediatrician-formulated for children aged 3–12. Starting at ₹26/day." />
+    <meta property="og:title" content="olly — Pediatrician-Formulated Daily Nutrition" />
+    <meta property="og:description" content="Zero sugar. Zero inactive ingredients. The only children's gummy in India with methylcobalamin, methylfolate, and K2." />
+    <meta property="og:image" content="/hero-desktop.png" />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
     <title>olly — Pediatrician-Formulated Daily Nutrition</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preload" as="image" href="/hero-desktop.png" />
+    <link rel="preload" as="font" type="font/truetype" href="/fonts/FictionalTrial-Variable.ttf" crossorigin />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&family=Poppins:wght@500;600&display=swap" rel="stylesheet" />
+
+    <!-- Google Analytics 4 — TODO: replace G-XXXXXXXXXX with real ID -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+
+    <!-- Meta Pixel — TODO: replace XXXXXXXXXXXXXXXX with real Pixel ID -->
+    <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window, document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', 'XXXXXXXXXXXXXXXX');
+      fbq('track', 'PageView');
+    </script>
   </head>
   <body>
     <div id="root"></div>
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Product",
+      "name": "olly Kids Daily Multivitamin Gummy",
+      "description": "Zero-sugar children's gummy with methylcobalamin B12, 5-MTHF folate, and D3+K2. Pediatrician-formulated for ages 3–12.",
+      "brand": { "@type": "Brand", "name": "olly" },
+      "offers": {
+        "@type": "Offer",
+        "price": "799",
+        "priceCurrency": "INR",
+        "availability": "https://schema.org/InStock",
+        "priceValidUntil": "2026-12-31"
+      }
+    }
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

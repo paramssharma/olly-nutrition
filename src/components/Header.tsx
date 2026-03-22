@@ -2,22 +2,34 @@ import { useState } from 'react'
 
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false)
+  const [barDismissed, setBarDismissed] = useState(false)
 
   return (
     <header className="site-header">
-      <div className="announce-bar">Unlock 25% savings on every order</div>
+      {!barDismissed && (
+        <div className="announce-bar">
+          <a href="#subscribe" className="announce-link">Unlock 25% savings on every order &rarr;</a>
+          <button
+            className="announce-close"
+            aria-label="Dismiss announcement"
+            onClick={() => setBarDismissed(true)}
+          >
+            &#10005;
+          </button>
+        </div>
+      )}
 
       <nav className="nav-wrap" aria-label="Main navigation">
         <div className="nav-inner">
-          <a href="#adults" className="nav-link">Adults</a>
-          <a href="#kids" className="nav-link">Kids</a>
+          <a href="#products" className="nav-link">Products</a>
+          <a href="#science" className="nav-link">The Science</a>
 
           <a href="#" className="nav-logo" aria-label="Olly home">
             <img src="/olly-logo.svg" alt="Olly" className="nav-logo-img" />
           </a>
 
-          <a href="#science" className="nav-link">The Science</a>
-          <a href="#story" className="nav-link">Our Story</a>
+          <a href="#how-it-works" className="nav-link">How It Works</a>
+          <a href="#faq" className="nav-link">FAQ</a>
 
           <div className="nav-icons">
             <button className="icon-btn" aria-label="Account">
@@ -34,23 +46,30 @@ export default function Header() {
 
           <button
             className="hamburger"
-            aria-label="Open menu"
+            aria-label={mobileOpen ? 'Close menu' : 'Open menu'}
             aria-expanded={mobileOpen}
             onClick={() => setMobileOpen(o => !o)}
           >
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
-              <line x1="3" y1="6"  x2="21" y2="6"/>
-              <line x1="3" y1="12" x2="21" y2="12"/>
-              <line x1="3" y1="18" x2="21" y2="18"/>
-            </svg>
+            {mobileOpen ? (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="6" y1="6" x2="18" y2="18"/>
+                <line x1="6" y1="18" x2="18" y2="6"/>
+              </svg>
+            ) : (
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round">
+                <line x1="3" y1="6"  x2="21" y2="6"/>
+                <line x1="3" y1="12" x2="21" y2="12"/>
+                <line x1="3" y1="18" x2="21" y2="18"/>
+              </svg>
+            )}
           </button>
         </div>
 
         <div className={`mobile-nav${mobileOpen ? ' open' : ''}`} role="menu">
-          <a href="#adults"  className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>Adults</a>
-          <a href="#kids"    className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>Kids</a>
-          <a href="#science" className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>The Science</a>
-          <a href="#story"   className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>Our Story</a>
+          <a href="#products"     className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>Products</a>
+          <a href="#science"      className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>The Science</a>
+          <a href="#how-it-works" className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>How It Works</a>
+          <a href="#faq"          className="nav-link" role="menuitem" onClick={() => setMobileOpen(false)}>FAQ</a>
         </div>
       </nav>
     </header>

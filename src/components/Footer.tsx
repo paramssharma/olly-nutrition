@@ -1,14 +1,10 @@
 // ── Social icon SVG assets ──────────────────────────────────────────────────
-// Shared circle outline (Instagram + Facebook)
 const vCircle    = '/social-circle.svg'
-// Instagram paths
 const vInstaBox  = '/social-insta-box.svg'
 const vInstaDot  = '/social-insta-dot.svg'
 const vInstaView = '/social-insta-view.svg'
-// Facebook paths
 const vFbF       = '/social-fb-f.svg'
 const vFbBar     = '/social-fb-bar.svg'
-// YouTube paths
 const vYtCircle  = '/social-yt-circle.svg'
 const vYtPlay    = '/social-yt-play.svg'
 const vYtBar     = '/social-yt-bar.svg'
@@ -16,7 +12,6 @@ const vYtBar     = '/social-yt-bar.svg'
 const imgLogo       = '/footer-logo.svg'
 const imgMobileLogo = '/footer-logo-mobile.svg'
 
-// Each icon: 40×40 clip container → 39.024×40 inner (0.488px h-padding) → absolute layers
 function InstagramIcon() {
   return (
     <div style={{ width: 40, height: 40, overflow: 'hidden', flexShrink: 0 }}>
@@ -86,7 +81,8 @@ function YouTubeIcon() {
   )
 }
 
-const navLinks = ['Adults', 'Kids', 'Our story', 'Blogs', 'Learn']
+const shopLinks = ['Adults', 'Kids', 'Our Story', 'Blogs', 'Learn']
+const supportLinks = ['FAQ', 'Shipping & Returns', 'Contact Us', 'Privacy Policy', 'Terms of Service']
 
 export default function Footer() {
   return (
@@ -102,18 +98,28 @@ export default function Footer() {
         </div>
       </div>
 
-      {/* Desktop-only main section: wide social col + two nav cols */}
+      {/* Mobile nav links */}
+      <div className="footer-mobile-nav">
+        <div className="footer-mobile-nav-col">
+          {shopLinks.map((link) => <a key={link} href="#">{link}</a>)}
+        </div>
+        <div className="footer-mobile-nav-col">
+          {supportLinks.map((link) => <a key={link} href="#">{link}</a>)}
+        </div>
+      </div>
+
+      {/* Desktop-only main section */}
       <div className="footer-main">
-        <div className="footer-social">
+        <div className="footer-social footer-social-desktop">
           <a href="#" className="footer-social-icon" aria-label="Instagram"><InstagramIcon /></a>
           <a href="#" className="footer-social-icon" aria-label="Facebook"><FacebookIcon /></a>
           <a href="#" className="footer-social-icon" aria-label="YouTube"><YouTubeIcon /></a>
         </div>
         <div className="footer-nav-col">
-          {navLinks.map((link) => <a key={link} href="#">{link}</a>)}
+          {shopLinks.map((link) => <a key={link} href="#">{link}</a>)}
         </div>
         <div className="footer-nav-col">
-          {navLinks.map((link) => <a key={link} href="#">{link}</a>)}
+          {supportLinks.map((link) => <a key={link} href="#">{link}</a>)}
         </div>
       </div>
 
@@ -124,6 +130,10 @@ export default function Footer() {
         </div>
         <p className="footer-address">Eden Au Lac Apartments, Indranagar, 560038</p>
         <a href="mailto:hello@ollyhealth.in" className="footer-email">hello@ollyhealth.in</a>
+      </div>
+
+      <div className="footer-legal">
+        <p>FSSAI Lic. No. XXXXXXXXXXXXXXXXX &middot; &copy; {new Date().getFullYear()} olly Health India Pvt. Ltd. All rights reserved.</p>
       </div>
 
     </footer>
