@@ -97,27 +97,12 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 32px;
-  padding-inline: 40px;
+  padding: 4px 40px;
   font-size: 16px;
   font-weight: 400;
   line-height: 1.5;
   text-align: center;
-  position: relative;
 }
-.announce-link { color: var(--white); transition: opacity 0.2s; }
-.announce-link:hover { opacity: 0.8; }
-.announce-close {
-  position: absolute;
-  right: 12px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: rgba(255,255,255,0.5);
-  font-size: 14px;
-  padding: 4px 8px;
-  transition: color 0.2s;
-}
-.announce-close:hover { color: var(--white); }
 
 .nav-wrap {
   background: var(--white);
@@ -172,6 +157,42 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
 }
 .icon-btn:hover { background: rgba(0,0,0,0.06); }
 .icon-btn svg { width: 32px; height: 32px; display: block; }
+.cart-icon-btn { position: relative; }
+.cart-badge {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  min-width: 18px;
+  height: 18px;
+  padding: 0 5px;
+  border-radius: 9px;
+  background: var(--orange-cta);
+  color: #fff;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 18px;
+  text-align: center;
+  pointer-events: none;
+}
+
+.nav-reserve-btn {
+  font-family: var(--font-sans);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  padding: 10px 24px;
+  border: 1.5px solid var(--navy);
+  border-radius: 100px;
+  color: var(--navy);
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+.nav-reserve-btn:hover {
+  background: var(--navy);
+  color: var(--white);
+}
 
 .hamburger { display: none; padding: 8px; margin-left: auto; color: var(--navy); }
 .hamburger svg { display: block; }
@@ -1099,7 +1120,8 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
     justify-content: space-between;
   }
   .nav-inner > .nav-link,
-  .nav-icons { display: none; }
+  .nav-icons,
+  .nav-reserve-btn { display: none; }
   .hamburger { display: flex; }
 
   /* Hero mobile */
@@ -1243,8 +1265,7 @@ button { cursor: pointer; border: none; background: none; font: inherit; }
   .email-submit { width: 100%; }
 
   /* Announce bar mobile */
-  .announce-bar { padding-inline: 32px; font-size: 14px; }
-  .announce-close { right: 8px; }
+  .announce-bar { padding-inline: 16px; }
 
   /* Ingredients mobile */
   .ingredients { padding: 48px 16px; }

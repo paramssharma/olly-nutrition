@@ -1,4 +1,24 @@
-export default function Hero() {
+import { formatPrice } from '../lib/shopify'
+
+interface HeroProps {
+  subscribeVariantId?: string | null
+  subscribePrice?: string | null
+  subscribeCompareAt?: string | null
+  onAddToCart?: (variantId: string, quantity?: number) => Promise<void>
+  productLoading?: boolean
+}
+
+export default function Hero({
+  subscribeVariantId,
+  subscribePrice,
+  subscribeCompareAt,
+  onAddToCart,
+  productLoading,
+}: HeroProps) {
+  const price = subscribePrice ? formatPrice(subscribePrice) : '₹799'
+  const compareAt = subscribeCompareAt ? formatPrice(subscribeCompareAt) : '₹1,199'
+  const canBuy = subscribeVariantId && onAddToCart
+
   return (
     <section className="hero" aria-label="Hero">
       <div className="hero-content">
@@ -12,10 +32,21 @@ export default function Hero() {
           </div>
 
           <div className="hero-ctas">
-            <a href="#subscribe" className="btn-primary">
-              Subscribe — <span className="price-anchor">&#8377;1,199</span> &#8377;799/mo
-              <img src="/arrow-icon.svg" alt="" aria-hidden="true" className="btn-arrow" />
-            </a>
+            {canBuy ? (
+              <button
+                className="btn-primary"
+                onClick={() => onAddToCart(subscribeVariantId)}
+                disabled={productLoading}
+              >
+                Subscribe — <span className="price-anchor">{compareAt}</span> {price}/mo
+                <img src="/arrow-icon.svg" alt="" aria-hidden="true" className="btn-arrow" />
+              </button>
+            ) : (
+              <a href="#subscribe" className="btn-primary">
+                Subscribe — <span className="price-anchor">{compareAt}</span> {price}/mo
+                <img src="/arrow-icon.svg" alt="" aria-hidden="true" className="btn-arrow" />
+              </a>
+            )}
             <a href="#products" className="btn-outline">See what's inside</a>
           </div>
           <p className="hero-trust">FSSAI Licensed · GMP Certified · Third-Party Lab Tested</p>
